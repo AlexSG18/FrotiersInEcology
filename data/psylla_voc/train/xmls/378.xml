@@ -1,0 +1,27 @@
+<annotation><filename>378.jpg</filename><size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+<object><name>wasp</name>
+				<bndbox>
+					<xmin>289</xmin>
+					<ymin>85</ymin>
+					<xmax>324</xmax>
+					<ymax>142</ymax>
+				</bndbox>
+			</object><object><name>psylla</name>
+				<bndbox>
+					<xmin>245</xmin>
+					<ymin>458</ymin>
+					<xmax>300</xmax>
+					<ymax>492</ymax>
+				</bndbox>
+			</object><object><name>psylla</name>
+				<bndbox>
+					<xmin>16</xmin>
+					<ymin>25</ymin>
+					<xmax>45</xmax>
+					<ymax>65</ymax>
+				</bndbox>
+			</object></annotation>
