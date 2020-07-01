@@ -1,0 +1,13 @@
+<annotation><filename>225.jpg</filename><size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+<object><name>wasp</name>
+				<bndbox>
+					<xmin>169</xmin>
+					<ymin>233</ymin>
+					<xmax>221</xmax>
+					<ymax>263</ymax>
+				</bndbox>
+			</object></annotation>

@@ -1,0 +1,13 @@
+<annotation><filename>060.jpg</filename><size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+<object><name>psylla</name>
+				<bndbox>
+					<xmin>176</xmin>
+					<ymin>317</ymin>
+					<xmax>202</xmax>
+					<ymax>344</ymax>
+				</bndbox>
+			</object></annotation>
