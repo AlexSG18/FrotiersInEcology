@@ -5,7 +5,9 @@ from collections import defaultdict
 import numpy as np
 from torch.utils.data.dataset import ConcatDataset as _ConcatDataset
 
-from .builder import DATASETS
+#from .builder import DATASETS
+
+from .registry import DATASETS
 
 
 @DATASETS.register_module()

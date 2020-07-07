@@ -9,6 +9,11 @@ from mmcv.runner import get_dist_info
 from mmcv.utils import Registry, build_from_cfg
 from torch.utils.data import DataLoader
 
+#from mmdet.utils import build_from_cfg
+#from .dataset_wrappers import ConcatDataset, RepeatDataset
+#from .registry import DATASETS
+#from .registry import PIPELINES
+
 from .samplers import DistributedGroupSampler, DistributedSampler, GroupSampler
 
 if platform.system() != 'Windows':
@@ -21,7 +26,8 @@ if platform.system() != 'Windows':
 
 DATASETS = Registry('dataset')
 PIPELINES = Registry('pipeline')
-
+print("DATASETS .........................")
+print(DATASETS)
 
 def _concat_dataset(cfg, default_args=None):
     from .dataset_wrappers import ConcatDataset
@@ -47,8 +53,13 @@ def _concat_dataset(cfg, default_args=None):
 
 
 def build_dataset(cfg, default_args=None):
+    print("DATASETS3 .........................")
+    print(DATASETS)
     from .dataset_wrappers import (ConcatDataset, RepeatDataset,
                                    ClassBalancedDataset)
+    print("cfg .........................")
+    print(cfg)
+    
     if isinstance(cfg, (list, tuple)):
         dataset = ConcatDataset([build_dataset(c, default_args) for c in cfg])
     elif cfg['type'] == 'RepeatDataset':

@@ -14,38 +14,102 @@ model = dict(
         in_channels=[256, 512, 1024, 2048],
         out_channels=256,
         num_outs=5),
+#    rpn_head=dict(
+#        type='RPNHead',
+#        in_channels=256,
+#        feat_channels=256,
+#        anchor_scales=[8],
+#        anchor_ratios=[0.5, 1.0, 2.0],
+#        anchor_strides=[4, 8, 16, 32, 64],
+#        target_means=[.0, .0, .0, .0],
+#        target_stds=[1.0, 1.0, 1.0, 1.0],
+#        loss_cls=dict(
+#            type='CrossEntropyLoss', use_sigmoid=True, loss_weight=1.0),
+#        loss_bbox=dict(type='SmoothL1Loss', beta=1.0 / 9.0, loss_weight=1.0)),
+    
     rpn_head=dict(
         type='RPNHead',
         in_channels=256,
         feat_channels=256,
-        anchor_scales=[8],
-        anchor_ratios=[0.5, 1.0, 2.0],
-        anchor_strides=[4, 8, 16, 32, 64],
-        target_means=[.0, .0, .0, .0],
-        target_stds=[1.0, 1.0, 1.0, 1.0],
+        anchor_generator=dict(
+            type='AnchorGenerator',
+            scales=[8],
+            ratios=[0.5, 1.0, 2.0],
+            strides=[4, 8, 16, 32, 64]),
+        bbox_coder=dict(
+            type='DeltaXYWHBBoxCoder',
+            target_means=[0.0, 0.0, 0.0, 0.0],
+            target_stds=[1.0, 1.0, 1.0, 1.0]),
         loss_cls=dict(
             type='CrossEntropyLoss', use_sigmoid=True, loss_weight=1.0),
         loss_bbox=dict(type='SmoothL1Loss', beta=1.0 / 9.0, loss_weight=1.0)),
+#    roi_head=dict(
+#        type='BaseRoIHead',
+#        bbox_roi_extractor=dict(
+#            type='SingleRoIExtractor',
+#            roi_layer=dict(type='RoIAlign', out_size=7),
+#            out_channels=256,
+#            featmap_strides=[4, 8, 16, 32]),
+#        bbox_head=dict(
+#            type='SharedFCBBoxHead',
+#            num_fcs=2,
+#            in_channels=256,
+#            fc_out_channels=1024,
+#            roi_feat_size=7,
+#            num_classes=80,  # do not count BG anymore
+#            target_means=[0., 0., 0., 0.],
+#            target_stds=[0.1, 0.1, 0.2, 0.2],
+#            reg_class_agnostic=False,
+#            loss_cls=dict(
+#                type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0),
+#            loss_bbox=dict(type='SmoothL1Loss', beta=0.0, loss_weight=1.0)))) 
     roi_head=dict(
-        type='BaseRoIHead',
+        type='StandardRoIHead',
         bbox_roi_extractor=dict(
-            type='SingleRoIExtractor',
-            roi_layer=dict(type='RoIAlign', out_size=7),
-            out_channels=256,
-            featmap_strides=[4, 8, 16, 32]),
-        bbox_head=dict(
-            type='SharedFCBBoxHead',
-            num_fcs=2,
-            in_channels=256,
-            fc_out_channels=1024,
-            roi_feat_size=7,
-            num_classes=80,  # do not count BG anymore
-            target_means=[0., 0., 0., 0.],
-            target_stds=[0.1, 0.1, 0.2, 0.2],
-            reg_class_agnostic=False,
-            loss_cls=dict(
-                type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0),
-            loss_bbox=dict(type='SmoothL1Loss', beta=0.0, loss_weight=1.0))))       
+                type='SingleRoIExtractor',
+                roi_layer=dict(
+                type='RoIAlign',
+                out_size=7,
+                sample_num=0),
+                out_channels=256,
+featmap_strides=[4, 8, 16, 32]),
+bbox_head=dict(
+type='Shared2FCBBoxHead',
+in_channels=256,
+fc_out_channels=1024,
+roi_feat_size=7,
+num_classes=13,
+bbox_coder=dict(
+type='DeltaXYWHBBoxCoder',
+target_means=[0.0, 0.0, 0.0, 0.0],
+target_stds=[0.1, 0.1, 0.2, 0.2]),
+reg_class_agnostic=False,
+loss_cls=dict(
+type='CrossEntropyLoss',
+use_sigmoid=False,
+loss_weight=1.0),
+loss_bbox=dict(
+type='L1Loss',
+loss_weight=1.0))))        
+                
+                
+#    bbox_roi_extractor=dict(
+#        type='SingleRoIExtractor',
+#        roi_layer=dict(type='RoIAlign', out_size=14, sample_num=2),
+#        out_channels=1024,
+#        featmap_strides=[16]),
+#    bbox_head=dict(
+#        type='BBoxHead',
+#        with_avg_pool=True,
+#        roi_feat_size=7,
+#        in_channels=2048,
+#        num_classes=21,
+#        target_means=[0., 0., 0., 0.],
+#        target_stds=[0.1, 0.1, 0.2, 0.2],
+#        reg_class_agnostic=False,
+#        loss_cls=dict(
+#            type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0),
+#        loss_bbox=dict(type='SmoothL1Loss', beta=1.0, loss_weight=1.0)))        
 # model training and testing settings
 train_cfg = dict(
     rpn=dict(
