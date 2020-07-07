@@ -22,6 +22,7 @@ if platform.system() != 'Windows':
 DATASETS = Registry('dataset')
 PIPELINES = Registry('pipeline')
 
+
 def _concat_dataset(cfg, default_args=None):
     from .dataset_wrappers import ConcatDataset
     ann_files = cfg['ann_file']
@@ -47,7 +48,7 @@ def _concat_dataset(cfg, default_args=None):
 
 def build_dataset(cfg, default_args=None):
     from .dataset_wrappers import (ConcatDataset, RepeatDataset,
-                                   ClassBalancedDataset)    
+                                   ClassBalancedDataset)
     if isinstance(cfg, (list, tuple)):
         dataset = ConcatDataset([build_dataset(c, default_args) for c in cfg])
     elif cfg['type'] == 'RepeatDataset':
