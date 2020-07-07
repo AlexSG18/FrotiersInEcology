@@ -1,7 +1,5 @@
 # MMDetection
 
-
-
 ## Citation
 
 If you use this toolbox or benchmark in your research, please cite this project.
