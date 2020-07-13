@@ -110,6 +110,7 @@ def train_detector(model,
 
     # register eval hooks
     if validate:
+        #print("how many time here...............")
         val_dataset = build_dataset(cfg.data.val, dict(test_mode=True))
         val_dataloader = build_dataloader(
             val_dataset,

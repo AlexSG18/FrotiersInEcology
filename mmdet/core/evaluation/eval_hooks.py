@@ -16,6 +16,8 @@ class EvalHook(Hook):
         if not isinstance(dataloader, DataLoader):
             raise TypeError('dataloader must be a pytorch DataLoader, but got'
                             f' {type(dataloader)}')
+        #print("dataloader...............................")
+        #print(dataloader)
         self.dataloader = dataloader
         self.interval = interval
         self.eval_kwargs = eval_kwargs

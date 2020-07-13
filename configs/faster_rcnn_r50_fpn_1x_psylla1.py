@@ -144,98 +144,94 @@ test_cfg=dict(
             type='nms',
             iou_thr=0.5),
         max_per_img=100))
-# dataset settings
-dataset_type = 'PsyllaDataset'
-classes = ('psylla', 'wasp')
-data_root = 'data/psylla_voc/'
-img_norm_cfg = dict(
-    mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
-train_pipeline = [
+dataset_type='PsyllaDataset'
+data_root='data/psylla_voc/'
+img_norm_cfg=dict(
+    mean=[123.675, 116.28, 103.53],
+    std=[58.395, 57.12, 57.375],
+    to_rgb=True)
+train_pipeline=[
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True),
     dict(type='Resize', img_scale=(500, 500), keep_ratio=True),
     dict(type='RandomFlip', flip_ratio=0.5),
-    dict(type='Normalize', **img_norm_cfg),
-    dict(type='Pad', size_divisor=32),
+    dict(type='Normalize',
+        mean=[123.675, 116.28, 103.53],
+        std=[58.395, 57.12, 57.375],
+        to_rgb=True),
+    dict(type='Pad',
+        size_divisor=32),
     dict(type='DefaultFormatBundle'),
-    dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
-]
-val_pipeline = [
+    dict(type='Collect',
+        keys=['img', 'gt_bboxes', 'gt_labels'])]
+test_pipeline=[
     dict(type='LoadImageFromFile'),
-    dict(type='LoadAnnotations', with_bbox=True),
-    dict(type='Resize', img_scale=(500, 500), keep_ratio=True),
-    dict(type='RandomFlip', flip_ratio=0.5),
-    dict(type='Normalize', **img_norm_cfg),
-    dict(type='Pad', size_divisor=32),
-    dict(type='DefaultFormatBundle'),
-    dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
-]
-test_pipeline = [
-    dict(type='LoadImageFromFile'),
-    dict(
-        type='MultiScaleFlipAug',
+    dict(type='MultiScaleFlipAug',
         img_scale=(500, 500),
         flip=False,
         transforms=[
-            dict(type='Resize', keep_ratio=True),
+            dict(type='Resize',
+                keep_ratio=True),
             dict(type='RandomFlip'),
-            dict(type='Normalize', **img_norm_cfg),
-            dict(type='Pad', size_divisor=32),
-            dict(type='ImageToTensor', keys=['img']),
-            dict(type='Collect', keys=['img']),
-        ])
-]
-data = dict(
-#    imgs_per_gpu=1,
-#    workers_per_gpu=1,
+            dict(type='Normalize',
+                mean=[123.675, 116.28, 103.53],
+                std=[58.395, 57.12, 57.375],
+                to_rgb=True),
+            dict(type='Pad',
+                size_divisor=32),
+            dict(type='ImageToTensor',
+                keys=['img']),
+            dict(type='Collect',
+                keys=['img'])])]
+data=dict(
     samples_per_gpu=1,
     workers_per_gpu=2,
     train=dict(
-        type=dataset_type,
-        #classes=classes,
-        ann_file=data_root + 'train/train_annotations.json',
-        img_prefix=data_root + 'train/images',
-        pipeline=train_pipeline),
+        type='RepeatDataset',
+        times=3,
+        dataset=dict(
+            type=dataset_type,
+            ann_file=data_root + 'train/train_annotations.json',
+            img_prefix=data_root + 'train/images',
+            pipeline=train_pipeline)),
     val=dict(
         type=dataset_type,
-        #classes=classes,
         ann_file=data_root + 'val/val_annotations.json',
         img_prefix=data_root + 'val/images',
-        pipeline=val_pipeline),
+        pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        #classes=classes,
         ann_file=data_root + 'test/test_annotations.json',
         img_prefix=data_root + 'test/images',
         pipeline=test_pipeline))
-#evaluation = dict(interval=5, metric='mAP')
-evaluation = dict(  # The config to build the evaluation hook, refer to https://github.com/open-mmlab/mmdetection/blob/master/mmdet/core/evaluation/eval_hooks.py#L7 for more details.
-    interval=1,  # Evaluation interval
-    metric=['bbox', 'segm'])  # Metrics used during evaluation
-# optimizer
-optimizer = dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001)
-optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))
-# learning policy
-lr_config = dict(
+evaluation=dict(
+    interval=2,
+    metric='bbox')
+checkpoint_config=dict(
+    interval=1)
+log_config=dict(
+    interval=50,
+    hooks=[
+        dict(type='TextLoggerHook')])
+dist_params=dict(
+    backend='nccl')
+log_level='INFO'
+load_from=None
+resume_from=None
+workflow=[('train', 1)]
+optimizer=dict(
+    type='SGD',
+    lr=0.01,
+    momentum=0.9,
+    weight_decay=0.0001)
+optimizer_config=dict(
+    grad_clip=None)
+lr_config=dict(
     policy='step',
     warmup='linear',
     warmup_iters=500,
-    warmup_ratio=1.0 / 3,
-    step=[8, 11])
-checkpoint_config = dict(interval=1)
-# yapf:disable
-log_config = dict(
-    interval=20,#50,
-    hooks=[
-        dict(type='TextLoggerHook'),
-        dict(type='TensorboardLoggerHook')
-    ])
-# yapf:enable
-# runtime settings
-total_epochs = 20#100
-dist_params = dict(backend='nccl')
-log_level = 'INFO'
-work_dir = './work_dirs/faster_rcnn_r50_fpn_1x_psylla'
-load_from = None
-resume_from = None
-workflow = [('train', 1), ('val', 1)]
+    warmup_ratio=0.001,
+    step=[7])
+total_epochs=8
+work_dir='./work_dirs/faster_rcnn_r50_fpn_1x_psylla1'
+gpu_ids=range(0, 1)
