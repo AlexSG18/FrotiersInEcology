@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<doc>
+	<path>C:\Users\achiad.sviri\Desktop\100CANON\gimp_edition\gallery_insect\Psy304.jpg</path>
+	<outputs>
+		<object>
+			<item>
+				<name>wasp</name>
+				<bndbox>
+					<xmin>173</xmin>
+					<ymin>206</ymin>
+					<xmax>224</xmax>
+					<ymax>235</ymax>
+				</bndbox>
+			</item>
+			<item>
+				<name>wasp</name>
+				<bndbox>
+					<xmin>333</xmin>
+					<ymin>211</ymin>
+					<xmax>390</xmax>
+					<ymax>233</ymax>
+				</bndbox>
+			</item>
+		</object>
+	</outputs>
+	<time_labeled>1567597563756</time_labeled>
+	<labeled>true</labeled>
+	<size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+</doc>

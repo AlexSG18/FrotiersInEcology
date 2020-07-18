@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<doc>
+	<path>C:\Users\achiad.sviri\Desktop\100CANON\gimp_edition\gallery_insect\Psy246.jpg</path>
+	<outputs>
+		<object>
+			<item>
+				<name>psylla</name>
+				<bndbox>
+					<xmin>260</xmin>
+					<ymin>225</ymin>
+					<xmax>323</xmax>
+					<ymax>262</ymax>
+				</bndbox>
+			</item>
+		</object>
+	</outputs>
+	<time_labeled>1567596813167</time_labeled>
+	<labeled>true</labeled>
+	<size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+</doc>

@@ -1,0 +1,27 @@
+<annotation><filename>319.jpg</filename><size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+<object><name>psylla</name>
+				<bndbox>
+					<xmin>188</xmin>
+					<ymin>404</ymin>
+					<xmax>249</xmax>
+					<ymax>434</ymax>
+				</bndbox>
+			</object><object><name>psylla</name>
+				<bndbox>
+					<xmin>417</xmin>
+					<ymin>103</ymin>
+					<xmax>462</xmax>
+					<ymax>140</ymax>
+				</bndbox>
+			</object><object><name>psylla</name>
+				<bndbox>
+					<xmin>252</xmin>
+					<ymin>128</ymin>
+					<xmax>287</xmax>
+					<ymax>183</ymax>
+				</bndbox>
+			</object></annotation>

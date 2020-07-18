@@ -423,6 +423,7 @@ class PsyllaDataset(CustomDataset):
     def evaluate(self,
                  results,
                  metric='bbox',
+                 #metric='mAP',
                  logger=None,
                  jsonfile_prefix=None,
                  classwise=False,

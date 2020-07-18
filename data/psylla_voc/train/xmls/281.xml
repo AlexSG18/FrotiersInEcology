@@ -1,0 +1,27 @@
+<annotation><filename>281.jpg</filename><size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+<object><name>wasp</name>
+				<bndbox>
+					<xmin>269</xmin>
+					<ymin>121</ymin>
+					<xmax>312</xmax>
+					<ymax>152</ymax>
+				</bndbox>
+			</object><object><name>wasp</name>
+				<bndbox>
+					<xmin>43</xmin>
+					<ymin>241</ymin>
+					<xmax>107</xmax>
+					<ymax>267</ymax>
+				</bndbox>
+			</object><object><name>wasp</name>
+				<bndbox>
+					<xmin>3</xmin>
+					<ymin>148</ymin>
+					<xmax>52</xmax>
+					<ymax>169</ymax>
+				</bndbox>
+			</object></annotation>

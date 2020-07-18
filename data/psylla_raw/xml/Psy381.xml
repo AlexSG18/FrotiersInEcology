@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<doc>
+	<path>C:\Users\achiad.sviri\Desktop\100CANON\gimp_edition\gallery_insect\Psy381.jpg</path>
+	<outputs>
+		<object>
+			<item>
+				<name>psylla</name>
+				<bndbox>
+					<xmin>135</xmin>
+					<ymin>137</ymin>
+					<xmax>171</xmax>
+					<ymax>172</ymax>
+				</bndbox>
+			</item>
+			<item>
+				<name>psylla</name>
+				<bndbox>
+					<xmin>65</xmin>
+					<ymin>256</ymin>
+					<xmax>121</xmax>
+					<ymax>281</ymax>
+				</bndbox>
+			</item>
+		</object>
+	</outputs>
+	<time_labeled>1567599180282</time_labeled>
+	<labeled>true</labeled>
+	<size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+</doc>
