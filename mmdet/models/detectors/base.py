@@ -338,7 +338,6 @@ class BaseDetector(nn.Module, metaclass=ABCMeta):
             show=show,
             wait_time=wait_time,
             out_file=out_file)
-
         if not (show or out_file):
             warnings.warn('show==False and out_file is not specified, only '
                           'result image will be returned')

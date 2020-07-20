@@ -83,10 +83,10 @@ for img_path, xml_path in zip(imgs, xmls):
     prediction = inference_detector(model, str(img_path))
     gt = extract_xml_bbox(xml_path)
 
-    img = show_result_pyplot(str(img_path), prediction,
-                             model.CLASSES, retimg=True)
+#    img = show_result_pyplot(str(img_path), prediction,
+#                             model.CLASSES, retimg=True)
+    img = show_result_pyplot( model, str(img_path), prediction, retimg=True)#retimg= returned image from show_result_pyplot
     img = plot_gt(img, gt)
-
     plt.imshow((mmcv.bgr2rgb(img)))
     plt.savefig(Path('.')/'test_imgs'/img_path.name)
     #plt.savefig('/home/alex/mmdetection/data/psylla_voc/test/test_imgs'/img_path.name)
