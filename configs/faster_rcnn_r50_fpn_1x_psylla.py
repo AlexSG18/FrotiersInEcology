@@ -201,7 +201,7 @@ data = dict(
         #classes=classes,
         ann_file=data_root + 'val/val_annotations.json',
         img_prefix=data_root + 'val/images',
-        pipeline=val_pipeline),
+        pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
         #classes=classes,
@@ -211,7 +211,7 @@ data = dict(
 #evaluation = dict(interval=5, metric='mAP')
 evaluation = dict(  # The config to build the evaluation hook, refer to https://github.com/open-mmlab/mmdetection/blob/master/mmdet/core/evaluation/eval_hooks.py#L7 for more details.
     interval=1,  # Evaluation interval
-    metric=['bbox', 'segm'])  # Metrics used during evaluation
+    metric=['bbox'])  # Metrics used during evaluation
 # optimizer
 optimizer = dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))
@@ -225,7 +225,7 @@ lr_config = dict(
 checkpoint_config = dict(interval=1)
 # yapf:disable
 log_config = dict(
-    interval=20,#50,
+    interval=50,#50,
     hooks=[
         dict(type='TextLoggerHook'),
         dict(type='TensorboardLoggerHook')
