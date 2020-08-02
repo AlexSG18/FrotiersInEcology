@@ -60,9 +60,9 @@ def plot_gt(img, bboxes):
     return img
 
 
-config_file = '/home/alex/Documents/GitHub/FrotiersInEcology/configs/faster_rcnn_r50_fpn_1x_psylla1.py'
+config_file = '/home/alex/Documents/GitHub/FrotiersInEcology/configs/faster_rcnn_r50_fpn_1x_psylla2.py'
 # download the checkpoint from model zoo and put it in `checkpoints/`
-checkpoint_file = '/home/alex/Documents/GitHub/FrotiersInEcology/work_dirs/faster_rcnn_r50_fpn_1x_psylla1/epoch_100.pth'
+checkpoint_file = '/home/alex/Documents/GitHub/FrotiersInEcology/work_dirs/faster_rcnn_r50_fpn_1x_psylla/epoch_100.pth'
 
 
 model = init_detector(config_file, checkpoint_file, device='cuda:0')
