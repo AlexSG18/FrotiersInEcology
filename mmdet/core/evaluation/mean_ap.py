@@ -23,13 +23,13 @@ def average_precision(recalls, precisions, mode='area'):
         float or ndarray: calculated average precision
     """
     
-    with open('/home/alex/Documents/GitHub/FrotiersInEcology/mmdet/core/evaluation/AOC.txt', 'a') as f:
+    with open('AOC.txt', 'a') as f:
         f.write("Debug_recalls\n")
         recall=list(recalls.flatten())
-        f.write(str(recall).strip('[]')+"\n")
+        f.write(str(recall)+"\n")
         f.write("Debug_precisions\n")
         precision=list(precisions.flatten())
-        f.write(str(precision).strip('[]')+"\n")       
+        f.write(str(precision)+"\n")       
         
         f.close() 
     

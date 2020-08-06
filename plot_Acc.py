@@ -44,6 +44,15 @@ def main():
     print(val_acc_list)  
     
     
+    with open('accuracy.txt', 'a') as f:
+        f.write("train_acc_list\n")
+        f.write(str(train_acc_list)+"\n")
+        f.write("val_acc_list\n")
+        f.write(str(val_acc_list)+"\n")       
+        
+        f.close()     
+    
+    
     plt.plot(train_acc_list, label="Trainnig set")
     plt.plot(val_acc_list, label="Validation set")
     plt.ylim(94, 100)
