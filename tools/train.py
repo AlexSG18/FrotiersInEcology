@@ -140,6 +140,7 @@ def main():
             CLASSES=datasets[0].CLASSES)
     # add an attribute for visualization convenience
     model.CLASSES = datasets[0].CLASSES
+    #print("how 11111...................................................\n")
     train_detector(
         model,
         datasets,

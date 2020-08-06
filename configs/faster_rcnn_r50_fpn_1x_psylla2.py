@@ -146,7 +146,7 @@ test_cfg=dict(
             iou_thr=0.5),
         max_per_img=100))
 # dataset settings
-dataset_type = 'PsyllaDataset'
+dataset_type = 'PsyllaDataset2'
 classes = ('psylla', 'wasp')
 data_root = 'data/psylla_voc/'
 img_norm_cfg = dict(
@@ -207,7 +207,7 @@ data = dict(
 #evaluation = dict(interval=5, metric='mAP')
 evaluation = dict(  # The config to build the evaluation hook, refer to https://github.com/open-mmlab/mmdetection/blob/master/mmdet/core/evaluation/eval_hooks.py#L7 for more details.
     interval=1,  # Evaluation interval
-    metric=['bbox'])  # Metrics used during evaluation
+    metric=['mAP'])  # Metrics used during evaluation
 # optimizer
 optimizer = dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))
@@ -231,7 +231,7 @@ log_config = dict(
 total_epochs = 100
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = './work_dirs/faster_rcnn_r50_fpn_1x_psylla'
+work_dir = './work_dirs/faster_rcnn_r50_fpn_1x_psylla2'
 load_from = None
 resume_from = None
 workflow = [('train', 1), ('val', 1)]

@@ -22,6 +22,32 @@ def average_precision(recalls, precisions, mode='area'):
     Returns:
         float or ndarray: calculated average precision
     """
+    
+    with open('/home/alex/Documents/GitHub/FrotiersInEcology/mmdet/core/evaluation/AOC.txt', 'a') as f:
+        f.write("Debug_recalls\n")
+        recall=list(recalls.flatten())
+        f.write(str(recall).strip('[]')+"\n")
+        f.write("Debug_precisions\n")
+        precision=list(precisions.flatten())
+        f.write(str(precision).strip('[]')+"\n")       
+        
+        f.close() 
+    
+#    
+#    f = open("AOC.txt","a")
+#    print('Debug_recalls')
+#    f.write("Debug_recalls\n") 
+#    recall=list(recalls.flatten())
+#    f.write("Hello \n") 
+#    f.write(str(recall).strip('[]')) 
+#    print(recall)
+#    print('Debug_precisions')
+#    precision=list(precisions.flatten())
+#    print(precision)
+#    
+#    f.flush()
+#    f.close() 
+    
     no_scale = False
     if recalls.ndim == 1:
         no_scale = True

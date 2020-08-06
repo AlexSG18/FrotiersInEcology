@@ -33,6 +33,7 @@ def test_ce_loss():
 
 def test_accuracy():
     # test for empty pred
+    print("accuracy_here.....................................")
     pred = torch.empty(0, 4)
     label = torch.empty(0)
     accuracy = Accuracy(topk=1)

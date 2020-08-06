@@ -21,6 +21,7 @@ def set_random_seed(seed, deterministic=False):
             to True and `torch.backends.cudnn.benchmark` to False.
             Default: False.
     """
+    #print("how 22222.....................................................\n")
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -37,8 +38,9 @@ def train_detector(model,
                    validate=False,
                    timestamp=None,
                    meta=None):
-    logger = get_root_logger(cfg.log_level)
+    #print("how 22222.....................................................\n")
 
+    logger = get_root_logger(cfg.log_level)
     # prepare data loaders
     dataset = dataset if isinstance(dataset, (list, tuple)) else [dataset]
     if 'imgs_per_gpu' in cfg.data:
@@ -110,7 +112,7 @@ def train_detector(model,
 
     # register eval hooks
     if validate:
-        #print("how many time here...............")
+        #print("how many time here.....................................................")
         val_dataset = build_dataset(cfg.data.val, dict(test_mode=True))
         val_dataloader = build_dataloader(
             val_dataset,

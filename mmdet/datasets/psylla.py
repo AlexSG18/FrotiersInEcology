@@ -388,7 +388,7 @@ class PsyllaDataset(CustomDataset):
             if bboxes.shape[0] == 0:
                 bboxes = np.zeros((0, 4))
             gt_bboxes.append(bboxes)
-
+        print("recalls.....................................")
         recalls = eval_recalls(
             gt_bboxes, results, proposal_nums, iou_thrs, logger=logger)
         ar = recalls.mean(axis=1)
@@ -478,6 +478,7 @@ class PsyllaDataset(CustomDataset):
                 continue
 
             if metric not in result_files:
+                print("proposal.................................................")
                 raise KeyError(f'{metric} is not in results')
             try:
                 cocoDt = cocoGt.loadRes(result_files[metric])
@@ -493,6 +494,7 @@ class PsyllaDataset(CustomDataset):
             cocoEval.params.catIds = self.cat_ids
             cocoEval.params.imgIds = self.img_ids
             if metric == 'proposal':
+                print("proposal.................................................")
                 cocoEval.params.useCats = 0
                 cocoEval.params.maxDets = list(proposal_nums)
                 cocoEval.evaluate()
@@ -506,6 +508,8 @@ class PsyllaDataset(CustomDataset):
                     val = float(f'{cocoEval.stats[i + 6]:.3f}')
                     eval_results[item] = val
             else:
+                print("here.................................................")
+                print(classwise)
                 cocoEval.evaluate()
                 cocoEval.accumulate()
                 cocoEval.summarize()
@@ -513,6 +517,8 @@ class PsyllaDataset(CustomDataset):
                     # Compute per-category AP
                     # from https://github.com/facebookresearch/detectron2/
                     precisions = cocoEval.eval['precision']
+                    print("here.................................................")
+                    print(precisions)
                     # precision: (iou, recall, cls, area range, max dets)
                     assert len(self.cat_ids) == precisions.shape[2]
 
