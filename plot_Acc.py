@@ -61,7 +61,7 @@ def main():
     plt.xlabel('Number of epochs')
     plt.ylabel('Accuracy (%)')
     plt.axes
-    plt.savefig('foo.png')
+    plt.savefig('foo.fig')
     plt.show()
 
 

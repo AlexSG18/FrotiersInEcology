@@ -260,6 +260,11 @@ def tpfp_default(det_bboxes,
                 area = (bbox[2] - bbox[0]) * (bbox[3] - bbox[1])
                 if area >= min_area and area < max_area:
                     fp[k, i] = 1
+#        print("tp.........................................")
+#        print(tp)
+#        print("fp.........................................")
+#        print(fp)
+
     return tp, fp
 
 
@@ -377,6 +382,8 @@ def eval_map(det_results,
         eps = np.finfo(np.float32).eps
         recalls = tp / np.maximum(num_gts[:, np.newaxis], eps)
         precisions = tp / np.maximum((tp + fp), eps)
+        print("ap..........................................")
+        print(recalls)
         # calculate AP
         if scale_ranges is None:
             recalls = recalls[0, :]
@@ -384,6 +391,8 @@ def eval_map(det_results,
             num_gts = num_gts.item()
         mode = 'area' if dataset != 'voc07' else '11points'
         ap = average_precision(recalls, precisions, mode)
+        print("recalls..........................................")
+        print(recalls)
         eval_results.append({
             'num_gts': num_gts,
             'num_dets': num_dets,
