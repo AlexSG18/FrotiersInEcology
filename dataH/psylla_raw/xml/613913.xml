@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<doc>
+	<path>D:\Hazeka-2019-500px\613913.jpg</path>
+	<outputs>
+		<object>
+			<item>
+				<name>Glycaspis</name>
+				<bndbox>
+					<xmin>161</xmin>
+					<ymin>292</ymin>
+					<xmax>204</xmax>
+					<ymax>329</ymax>
+				</bndbox>
+			</item>
+		</object>
+	</outputs>
+	<time_labeled>1588156602946</time_labeled>
+	<labeled>true</labeled>
+	<size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+</doc>

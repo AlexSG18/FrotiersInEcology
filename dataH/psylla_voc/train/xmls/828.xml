@@ -1,0 +1,27 @@
+<annotation><filename>828.jpg</filename><size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+<object><name>Glycaspis</name>
+				<bndbox>
+					<xmin>386</xmin>
+					<ymin>99</ymin>
+					<xmax>426</xmax>
+					<ymax>131</ymax>
+				</bndbox>
+			</object><object><name>Glycaspis</name>
+				<bndbox>
+					<xmin>382</xmin>
+					<ymin>400</ymin>
+					<xmax>426</xmax>
+					<ymax>427</ymax>
+				</bndbox>
+			</object><object><name>Glycaspis</name>
+				<bndbox>
+					<xmin>85</xmin>
+					<ymin>405</ymin>
+					<xmax>122</xmax>
+					<ymax>434</ymax>
+				</bndbox>
+			</object></annotation>

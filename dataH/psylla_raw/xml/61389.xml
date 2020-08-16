@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<doc>
+	<path>D:\Hazeka-2019-500px\61389.jpg</path>
+	<outputs>
+		<object>
+			<item>
+				<name>Glycaspis</name>
+				<bndbox>
+					<xmin>322</xmin>
+					<ymin>113</ymin>
+					<xmax>359</xmax>
+					<ymax>163</ymax>
+				</bndbox>
+			</item>
+			<item>
+				<name>Glycaspis</name>
+				<bndbox>
+					<xmin>98</xmin>
+					<ymin>69</ymin>
+					<xmax>128</xmax>
+					<ymax>107</ymax>
+				</bndbox>
+			</item>
+			<item>
+				<name>Glycaspis</name>
+				<bndbox>
+					<xmin>77</xmin>
+					<ymin>374</ymin>
+					<xmax>115</xmax>
+					<ymax>401</ymax>
+				</bndbox>
+			</item>
+		</object>
+	</outputs>
+	<time_labeled>1588155400878</time_labeled>
+	<labeled>true</labeled>
+	<size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+</doc>

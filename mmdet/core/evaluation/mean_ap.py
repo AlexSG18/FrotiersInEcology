@@ -383,7 +383,7 @@ def eval_map(det_results,
         recalls = tp / np.maximum(num_gts[:, np.newaxis], eps)
         precisions = tp / np.maximum((tp + fp), eps)
         print("ap..........................................")
-        print(recalls)
+        print(tp)
         # calculate AP
         if scale_ranges is None:
             recalls = recalls[0, :]

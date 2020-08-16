@@ -148,6 +148,8 @@ test_cfg=dict(
 # dataset settings
 dataset_type = 'PsyllaDataset2'
 classes = ('psylla', 'wasp')
+#dataset_type = 'Hazeka'
+#classes = ('Psyllaephagus', 'Glycaspis')
 data_root = 'data/psylla_voc/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
@@ -208,6 +210,7 @@ data = dict(
 evaluation = dict(  # The config to build the evaluation hook, refer to https://github.com/open-mmlab/mmdetection/blob/master/mmdet/core/evaluation/eval_hooks.py#L7 for more details.
     interval=1,  # Evaluation interval
     metric=['mAP'])  # Metrics used during evaluation
+#    metric='bbox')
 # optimizer
 optimizer = dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))
@@ -228,10 +231,11 @@ log_config = dict(
     ])
 # yapf:enable
 # runtime settings
-total_epochs = 5#100
+total_epochs = 100
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = './work_dirs/faster_rcnn_r50_fpn_1x_psylla2'
+#work_dir = './work_dirs/faster_rcnn_r50_fpn_1x_hazeka'
+work_dir = './work_dirs/faster_rcnn_r50_fpn_1x_psylla3'
 load_from = None
 resume_from = None
 workflow = [('train', 1), ('val', 1)]

@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<doc>
+	<path>D:\Hazeka-2019-500px\613832.jpg</path>
+	<outputs>
+		<object>
+			<item>
+				<name>Psyllaephagus </name>
+				<bndbox>
+					<xmin>121</xmin>
+					<ymin>287</ymin>
+					<xmax>156</xmax>
+					<ymax>312</ymax>
+				</bndbox>
+			</item>
+		</object>
+	</outputs>
+	<time_labeled>1588155021112</time_labeled>
+	<labeled>true</labeled>
+	<size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+</doc>

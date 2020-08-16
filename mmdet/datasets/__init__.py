@@ -13,6 +13,7 @@ from .xml_style import XMLDataset
 
 from .psylla import PsyllaDataset
 from .psylla2 import PsyllaDataset2
+#from .Hazeka import hazeka
 
 
 __all__ = [
@@ -22,5 +23,5 @@ __all__ = [
     'CityscapesDataset', 'LVISDataset', 'DeepFashionDataset', 'GroupSampler',
     'DistributedGroupSampler', 'DistributedSampler', 'build_dataloader',
     'ConcatDataset', 'RepeatDataset', 'ClassBalancedDataset',
-    'WIDERFaceDataset', 'DATASETS', 'PIPELINES', 'build_dataset', 'PsyllaDataset', 'PsyllaDataset2' 
+    'WIDERFaceDataset', 'DATASETS', 'PIPELINES', 'build_dataset', 'PsyllaDataset', 'PsyllaDataset2', 'hazeka' 
 ]
