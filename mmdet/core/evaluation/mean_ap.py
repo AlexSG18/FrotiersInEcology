@@ -1,4 +1,5 @@
 from multiprocessing import Pool
+import csv
 
 import mmcv
 import numpy as np
@@ -32,8 +33,12 @@ def average_precision(recalls, precisions, mode='area'):
         f.write(str(precision)+"\n")       
         
         f.close() 
+    print("recalls000..........................................")
+    print(recalls)
     
-#    
+    print("precisions000..........................................")
+    print(precisions)
+##    
 #    f = open("AOC.txt","a")
 #    print('Debug_recalls')
 #    f.write("Debug_recalls\n") 
@@ -136,8 +141,8 @@ def tpfp_imagenet(det_bboxes,
     gt_h = gt_bboxes[:, 3] - gt_bboxes[:, 1]
     iou_thrs = np.minimum((gt_w * gt_h) / ((gt_w + 10.0) * (gt_h + 10.0)),
                           default_iou_thr)
-    print("iou_thrs.........................")
-    print(iou_thrs)
+#    print("iou_thrs.........................")
+#    print(iou_thrs)
 
     # sort all detections by scores in descending order
     sort_inds = np.argsort(-det_bboxes[:, -1])
@@ -255,8 +260,8 @@ def tpfp_default(det_bboxes,
 #        print(iou_thr)
         for i in sort_inds:
             if ious_max[i] >= iou_thr:
-                print("iou_thr..........................................")
-                print(ious_max[i])
+#                print("iou_thr..........................................")
+#                print(ious_max[i])
                 matched_gt = ious_argmax[i]
                 if not (gt_ignore_inds[matched_gt]
                         or gt_area_ignore[matched_gt]):
@@ -360,6 +365,7 @@ def eval_map(det_results,
         cls_dets, cls_gts, cls_gts_ignore = get_cls_results(
             det_results, annotations, i)
         # choose proper function according to datasets to compute tp and fp
+        
         if dataset in ['det', 'vid']:
             tpfp_func = tpfp_imagenet
         else:
@@ -370,8 +376,8 @@ def eval_map(det_results,
             zip(cls_dets, cls_gts, cls_gts_ignore,
                 [iou_thr for _ in range(num_imgs)],
                 [area_ranges for _ in range(num_imgs)]))
-        print("iou_thr...")
-        print(iou_thr)
+#        print("iou_thr...")
+#        print(iou_thr)
         tp, fp = tuple(zip(*tpfp))
         # calculate gt number of each scale
         # ignored gts or gts beyond the specific scale are not counted
@@ -389,17 +395,25 @@ def eval_map(det_results,
         cls_dets = np.vstack(cls_dets)
         num_dets = cls_dets.shape[0]
         sort_inds = np.argsort(-cls_dets[:, -1])
+        cs = cls_dets[:, -1]
+        cs = cs[sort_inds]
         tp = np.hstack(tp)[:, sort_inds]
         fp = np.hstack(fp)[:, sort_inds]
         # calculate recall and precision with tp and fp
         tp = np.cumsum(tp, axis=1)
         fp = np.cumsum(fp, axis=1)
+        cls_dets = np.cumsum(cls_dets, axis=1)
         eps = np.finfo(np.float32).eps
         recalls = tp / np.maximum(num_gts[:, np.newaxis], eps)
         precisions = tp / np.maximum((tp + fp), eps)
+        print("cs........")
+        cs=list(cs.flatten())
+        print(cs)
         print("tp..........................................11")
+        tp=list(tp.flatten())
         print(tp)
         print("fp..........................................11")
+        fp=list(fp.flatten())
         print(fp)
         # calculate AP
         if scale_ranges is None:
@@ -409,7 +423,46 @@ def eval_map(det_results,
         mode = 'area' if dataset != 'voc07' else '11points'
         ap = average_precision(recalls, precisions, mode)
         print("recalls..........................................")
-        print(recalls)
+        recall=list(recalls.flatten())
+        precision=list(precisions.flatten())
+        print(recall)
+        fn = recall.copy()
+        for i in range(len(recall)):
+            fn[i] = (tp[i] - recall[i] * tp[i]) / recall[i]
+        
+        print("fn..........................................")
+        print(fn)
+        
+        my_array = np.asarray(fn)
+        print(my_array)
+        
+        my_array = my_array.reshape((-1, 1)) # <--- THIS IS IT
+        print(my_array)
+
+    
+#        with open('fn.txt', 'a') as f:
+#
+#            f.write(str(recall)+"\n")
+#            f.write("Debug_precisions\n")
+#            precision=list(precisions.flatten())
+#            f.write(str(precision)+"\n")       
+#            
+#            f.close() 
+        if recalls[0] == 0.04:
+            rows = zip(recall,precision,tp,fp,fn,cs)
+            with open('wasp.csv', "w") as f:
+                writer = csv.writer(f)
+                for row in rows:
+                    writer.writerow(row)
+                    
+        else:
+            rows = zip(recall,precision,tp,fp,fn,cs)
+            with open('psylla.csv', "w") as f:
+                writer = csv.writer(f)
+                for row in rows:
+                    writer.writerow(row)
+        
+
         eval_results.append({
             'num_gts': num_gts,
             'num_dets': num_dets,
