@@ -68,8 +68,10 @@ def average_precision(recalls, precisions, mode='area'):
             ap[i] = np.sum(
                 (mrec[i, ind + 1] - mrec[i, ind]) * mpre[i, ind + 1])
     elif mode == '11points':
+        print("thr..........................................")
         for i in range(num_scales):
             for thr in np.arange(0, 1 + 1e-3, 0.1):
+                print(thr)
                 precs = precisions[i, recalls[i, :] >= thr]
                 prec = precs.max() if precs.size > 0 else 0
                 ap[i] += prec
@@ -134,6 +136,9 @@ def tpfp_imagenet(det_bboxes,
     gt_h = gt_bboxes[:, 3] - gt_bboxes[:, 1]
     iou_thrs = np.minimum((gt_w * gt_h) / ((gt_w + 10.0) * (gt_h + 10.0)),
                           default_iou_thr)
+    print("iou_thrs.........................")
+    print(iou_thrs)
+
     # sort all detections by scores in descending order
     sort_inds = np.argsort(-det_bboxes[:, -1])
     for k, (min_area, max_area) in enumerate(area_ranges):
@@ -226,12 +231,16 @@ def tpfp_default(det_bboxes,
                 fp[i, (det_areas >= min_area) & (det_areas < max_area)] = 1
         return tp, fp
 
+#    print("ious..........................................")
     ious = bbox_overlaps(det_bboxes, gt_bboxes)
+#    print(ious)
     # for each det, the max iou with all gts
     ious_max = ious.max(axis=1)
     # for each det, which gt overlaps most with it
     ious_argmax = ious.argmax(axis=1)
     # sort all dets in descending order by scores
+#    print("ious_argmax..........................................")
+#    print(ious_max)
     sort_inds = np.argsort(-det_bboxes[:, -1])
     for k, (min_area, max_area) in enumerate(area_ranges):
         gt_covered = np.zeros(num_gts, dtype=bool)
@@ -242,8 +251,12 @@ def tpfp_default(det_bboxes,
             gt_areas = (gt_bboxes[:, 2] - gt_bboxes[:, 0]) * (
                 gt_bboxes[:, 3] - gt_bboxes[:, 1])
             gt_area_ignore = (gt_areas < min_area) | (gt_areas >= max_area)
+#        print("iou_thr..........................................")
+#        print(iou_thr)
         for i in sort_inds:
             if ious_max[i] >= iou_thr:
+                print("iou_thr..........................................")
+                print(ious_max[i])
                 matched_gt = ious_argmax[i]
                 if not (gt_ignore_inds[matched_gt]
                         or gt_area_ignore[matched_gt]):
@@ -357,6 +370,8 @@ def eval_map(det_results,
             zip(cls_dets, cls_gts, cls_gts_ignore,
                 [iou_thr for _ in range(num_imgs)],
                 [area_ranges for _ in range(num_imgs)]))
+        print("iou_thr...")
+        print(iou_thr)
         tp, fp = tuple(zip(*tpfp))
         # calculate gt number of each scale
         # ignored gts or gts beyond the specific scale are not counted
@@ -382,8 +397,10 @@ def eval_map(det_results,
         eps = np.finfo(np.float32).eps
         recalls = tp / np.maximum(num_gts[:, np.newaxis], eps)
         precisions = tp / np.maximum((tp + fp), eps)
-        print("ap..........................................")
+        print("tp..........................................11")
         print(tp)
+        print("fp..........................................11")
+        print(fp)
         # calculate AP
         if scale_ranges is None:
             recalls = recalls[0, :]
