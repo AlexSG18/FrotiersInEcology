@@ -430,7 +430,7 @@ def eval_map(det_results,
         for i in range(len(recall)):
             fn[i] = (tp[i] - recall[i] * tp[i]) / recall[i]
         
-        print("fn..........................................")
+        print("fn..........................................check")
         print(fn)
         
         my_array = np.asarray(fn)
