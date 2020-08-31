@@ -1,4 +1,5 @@
 from multiprocessing import Pool
+import csv
 
 import mmcv
 import numpy as np
@@ -22,6 +23,36 @@ def average_precision(recalls, precisions, mode='area'):
     Returns:
         float or ndarray: calculated average precision
     """
+    
+    with open('AOC.txt', 'a') as f:
+        f.write("Debug_recalls\n")
+        recall=list(recalls.flatten())
+        f.write(str(recall)+"\n")
+        f.write("Debug_precisions\n")
+        precision=list(precisions.flatten())
+        f.write(str(precision)+"\n")       
+        
+        f.close() 
+    print("recalls000..........................................")
+    print(recalls)
+    
+    print("precisions000..........................................")
+    print(precisions)
+##    
+#    f = open("AOC.txt","a")
+#    print('Debug_recalls')
+#    f.write("Debug_recalls\n") 
+#    recall=list(recalls.flatten())
+#    f.write("Hello \n") 
+#    f.write(str(recall).strip('[]')) 
+#    print(recall)
+#    print('Debug_precisions')
+#    precision=list(precisions.flatten())
+#    print(precision)
+#    
+#    f.flush()
+#    f.close() 
+    
     no_scale = False
     if recalls.ndim == 1:
         no_scale = True
@@ -42,8 +73,10 @@ def average_precision(recalls, precisions, mode='area'):
             ap[i] = np.sum(
                 (mrec[i, ind + 1] - mrec[i, ind]) * mpre[i, ind + 1])
     elif mode == '11points':
+        print("thr..........................................")
         for i in range(num_scales):
             for thr in np.arange(0, 1 + 1e-3, 0.1):
+                print(thr)
                 precs = precisions[i, recalls[i, :] >= thr]
                 prec = precs.max() if precs.size > 0 else 0
                 ap[i] += prec
@@ -108,6 +141,9 @@ def tpfp_imagenet(det_bboxes,
     gt_h = gt_bboxes[:, 3] - gt_bboxes[:, 1]
     iou_thrs = np.minimum((gt_w * gt_h) / ((gt_w + 10.0) * (gt_h + 10.0)),
                           default_iou_thr)
+#    print("iou_thrs.........................")
+#    print(iou_thrs)
+
     # sort all detections by scores in descending order
     sort_inds = np.argsort(-det_bboxes[:, -1])
     for k, (min_area, max_area) in enumerate(area_ranges):
@@ -200,12 +236,16 @@ def tpfp_default(det_bboxes,
                 fp[i, (det_areas >= min_area) & (det_areas < max_area)] = 1
         return tp, fp
 
+#    print("ious..........................................")
     ious = bbox_overlaps(det_bboxes, gt_bboxes)
+#    print(ious)
     # for each det, the max iou with all gts
     ious_max = ious.max(axis=1)
     # for each det, which gt overlaps most with it
     ious_argmax = ious.argmax(axis=1)
     # sort all dets in descending order by scores
+#    print("ious_argmax..........................................")
+#    print(ious_max)
     sort_inds = np.argsort(-det_bboxes[:, -1])
     for k, (min_area, max_area) in enumerate(area_ranges):
         gt_covered = np.zeros(num_gts, dtype=bool)
@@ -216,8 +256,12 @@ def tpfp_default(det_bboxes,
             gt_areas = (gt_bboxes[:, 2] - gt_bboxes[:, 0]) * (
                 gt_bboxes[:, 3] - gt_bboxes[:, 1])
             gt_area_ignore = (gt_areas < min_area) | (gt_areas >= max_area)
+#        print("iou_thr..........................................")
+#        print(iou_thr)
         for i in sort_inds:
             if ious_max[i] >= iou_thr:
+#                print("iou_thr..........................................")
+#                print(ious_max[i])
                 matched_gt = ious_argmax[i]
                 if not (gt_ignore_inds[matched_gt]
                         or gt_area_ignore[matched_gt]):
@@ -234,6 +278,11 @@ def tpfp_default(det_bboxes,
                 area = (bbox[2] - bbox[0]) * (bbox[3] - bbox[1])
                 if area >= min_area and area < max_area:
                     fp[k, i] = 1
+#        print("tp.........................................")
+#        print(tp)
+#        print("fp.........................................")
+#        print(fp)
+
     return tp, fp
 
 
@@ -316,6 +365,7 @@ def eval_map(det_results,
         cls_dets, cls_gts, cls_gts_ignore = get_cls_results(
             det_results, annotations, i)
         # choose proper function according to datasets to compute tp and fp
+        
         if dataset in ['det', 'vid']:
             tpfp_func = tpfp_imagenet
         else:
@@ -326,6 +376,8 @@ def eval_map(det_results,
             zip(cls_dets, cls_gts, cls_gts_ignore,
                 [iou_thr for _ in range(num_imgs)],
                 [area_ranges for _ in range(num_imgs)]))
+#        print("iou_thr...")
+#        print(iou_thr)
         tp, fp = tuple(zip(*tpfp))
         # calculate gt number of each scale
         # ignored gts or gts beyond the specific scale are not counted
@@ -343,14 +395,26 @@ def eval_map(det_results,
         cls_dets = np.vstack(cls_dets)
         num_dets = cls_dets.shape[0]
         sort_inds = np.argsort(-cls_dets[:, -1])
+        cs = cls_dets[:, -1]
+        cs = cs[sort_inds]
         tp = np.hstack(tp)[:, sort_inds]
         fp = np.hstack(fp)[:, sort_inds]
         # calculate recall and precision with tp and fp
         tp = np.cumsum(tp, axis=1)
         fp = np.cumsum(fp, axis=1)
+        cls_dets = np.cumsum(cls_dets, axis=1)
         eps = np.finfo(np.float32).eps
         recalls = tp / np.maximum(num_gts[:, np.newaxis], eps)
         precisions = tp / np.maximum((tp + fp), eps)
+        print("cs........")
+        cs=list(cs.flatten())
+        print(cs)
+        print("tp..........................................11")
+        tp=list(tp.flatten())
+        print(tp)
+        print("fp..........................................11")
+        fp=list(fp.flatten())
+        print(fp)
         # calculate AP
         if scale_ranges is None:
             recalls = recalls[0, :]
@@ -358,6 +422,47 @@ def eval_map(det_results,
             num_gts = num_gts.item()
         mode = 'area' if dataset != 'voc07' else '11points'
         ap = average_precision(recalls, precisions, mode)
+        print("recalls..........................................")
+        recall=list(recalls.flatten())
+        precision=list(precisions.flatten())
+        print(recall)
+        fn = recall.copy()
+        for i in range(len(recall)):
+            fn[i] = (tp[i] - recall[i] * tp[i]) / recall[i]
+        
+        print("fn..........................................")
+        print(fn)
+        
+        my_array = np.asarray(fn)
+        print(my_array)
+        
+        my_array = my_array.reshape((-1, 1)) # <--- THIS IS IT
+        print(my_array)
+
+    
+#        with open('fn.txt', 'a') as f:
+#
+#            f.write(str(recall)+"\n")
+#            f.write("Debug_precisions\n")
+#            precision=list(precisions.flatten())
+#            f.write(str(precision)+"\n")       
+#            
+#            f.close() 
+        if recalls[0] == 0.04:
+            rows = zip(recall,precision,tp,fp,fn,cs)
+            with open('wasp.csv', "w") as f:
+                writer = csv.writer(f)
+                for row in rows:
+                    writer.writerow(row)
+                    
+        else:
+            rows = zip(recall,precision,tp,fp,fn,cs)
+            with open('psylla.csv', "w") as f:
+                writer = csv.writer(f)
+                for row in rows:
+                    writer.writerow(row)
+        
+
         eval_results.append({
             'num_gts': num_gts,
             'num_dets': num_dets,

@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<annotation>
+<folder>Psyllid_Hadera-500px</folder>
+<filename>Psy443.jpg</filename>
+<path>C:\Users\achia\Google Drive\insect_recognition\Psyllid_Hadera-500px\Psy443.jpg</path>
+<source>
+    <database>Unknown</database>
+</source>
+<size>
+    <width>500</width>
+    <height>500</height>
+    <depth>3</depth>
+</size>
+
+<segmented>0</segmented>
+    <object>
+    <name>Glycaspis</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>327</xmin>
+        <ymin>72</ymin>
+        <xmax>358</xmax>
+        <ymax>128</ymax>
+    </bndbox>
+</object>
+    <object>
+    <name>Glycaspis</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>442</xmin>
+        <ymin>126</ymin>
+        <xmax>478</xmax>
+        <ymax>169</ymax>
+    </bndbox>
+</object>
+    <object>
+    <name>Glycaspis</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>103</xmin>
+        <ymin>255</ymin>
+        <xmax>158</xmax>
+        <ymax>288</ymax>
+    </bndbox>
+</object>
+    <object>
+    <name>psylla</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>51</xmin>
+        <ymin>302</ymin>
+        <xmax>79</xmax>
+        <ymax>322</ymax>
+    </bndbox>
+</object>
+    <object>
+    <name>psylla</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>416</xmin>
+        <ymin>125</ymin>
+        <xmax>439</xmax>
+        <ymax>145</ymax>
+    </bndbox>
+</object>
+    <object>
+    <name>psylla</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>467</xmin>
+        <ymin>424</ymin>
+        <xmax>497</xmax>
+        <ymax>452</ymax>
+    </bndbox>
+</object>
+</annotation>

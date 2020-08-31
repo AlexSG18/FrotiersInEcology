@@ -1,0 +1,4 @@
+Class,gts- expert label,dets – program label,recall,ap
+Psylla,96,177,0.99,0.937
+Wasp,25,58,0.96,0.911
+mAP,,,,0.924

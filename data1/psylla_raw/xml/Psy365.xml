@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<annotation>
+<folder>Psyllid_Hadera-500px</folder>
+<filename>Psy365.jpg</filename>
+<path>C:\Users\achia\Google Drive\insect_recognition\Psyllid_Hadera-500px\Psy365.jpg</path>
+<source>
+    <database>Unknown</database>
+</source>
+<size>
+    <width>500</width>
+    <height>500</height>
+    <depth>3</depth>
+</size>
+
+<segmented>0</segmented>
+    <object>
+    <name>Glycaspis</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>400</xmin>
+        <ymin>92</ymin>
+        <xmax>450</xmax>
+        <ymax>132</ymax>
+    </bndbox>
+</object>
+    <object>
+    <name>Glycaspis</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>219</xmin>
+        <ymin>194</ymin>
+        <xmax>282</xmax>
+        <ymax>224</ymax>
+    </bndbox>
+</object>
+    <object>
+    <name>Glycaspis</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>107</xmin>
+        <ymin>224</ymin>
+        <xmax>163</xmax>
+        <ymax>246</ymax>
+    </bndbox>
+</object>
+</annotation>

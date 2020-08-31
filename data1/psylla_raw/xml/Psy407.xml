@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<annotation>
+<folder>Psyllid_Hadera-500px</folder>
+<filename>Psy407.jpg</filename>
+<path>C:\Users\achia\Google Drive\insect_recognition\Psyllid_Hadera-500px\Psy407.jpg</path>
+<source>
+    <database>Unknown</database>
+</source>
+<size>
+    <width>500</width>
+    <height>500</height>
+    <depth>3</depth>
+</size>
+
+<segmented>0</segmented>
+    <object>
+    <name>Platyobria</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>120</xmin>
+        <ymin>196</ymin>
+        <xmax>145</xmax>
+        <ymax>226</ymax>
+    </bndbox>
+</object>
+    <object>
+    <name>Platyobria</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>17</xmin>
+        <ymin>28</ymin>
+        <xmax>65</xmax>
+        <ymax>51</ymax>
+    </bndbox>
+</object>
+    <object>
+    <name>Glycaspis</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>426</xmin>
+        <ymin>362</ymin>
+        <xmax>491</xmax>
+        <ymax>393</ymax>
+    </bndbox>
+</object>
+</annotation>

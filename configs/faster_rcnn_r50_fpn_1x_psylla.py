@@ -146,6 +146,7 @@ test_cfg=dict(
         max_per_img=100))
 # dataset settings
 dataset_type = 'PsyllaDataset'
+classes = ('psylla', 'wasp')
 data_root = 'data/psylla_voc/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
@@ -191,19 +192,26 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
+        #classes=classes,
         ann_file=data_root + 'train/train_annotations.json',
         img_prefix=data_root + 'train/images',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
+        #classes=classes,
         ann_file=data_root + 'val/val_annotations.json',
         img_prefix=data_root + 'val/images',
-        pipeline=val_pipeline),
+        pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
+        #classes=classes,
         ann_file=data_root + 'test/test_annotations.json',
         img_prefix=data_root + 'test/images',
         pipeline=test_pipeline))
+#evaluation = dict(interval=5, metric='mAP')
+evaluation = dict(  # The config to build the evaluation hook, refer to https://github.com/open-mmlab/mmdetection/blob/master/mmdet/core/evaluation/eval_hooks.py#L7 for more details.
+    interval=1,  # Evaluation interval
+    metric=['bbox'])  # Metrics used during evaluation
 # optimizer
 optimizer = dict(type='SGD', lr=0.02, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))
@@ -224,10 +232,10 @@ log_config = dict(
     ])
 # yapf:enable
 # runtime settings
-total_epochs = 2#100
+total_epochs = 20#100
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = './work_dirs/faster_rcnn_r50_fpn_1x_psylla'
+work_dir = './work_dirs/faster_rcnn_r50_fpn_1x_psylla3'
 load_from = None
 resume_from = None
-workflow = [('train', 1), ('val', 1)]
+workflow = [('train', 2), ('val', 1)]

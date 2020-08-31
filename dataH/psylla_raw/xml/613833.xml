@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<doc>
+	<path>D:\Hazeka-2019-500px\613833.jpg</path>
+	<outputs>
+		<object>
+			<item>
+				<name>Psyllaephagus </name>
+				<bndbox>
+					<xmin>320</xmin>
+					<ymin>363</ymin>
+					<xmax>368</xmax>
+					<ymax>382</ymax>
+				</bndbox>
+			</item>
+			<item>
+				<name>Psyllaephagus </name>
+				<bndbox>
+					<xmin>301</xmin>
+					<ymin>36</ymin>
+					<xmax>345</xmax>
+					<ymax>74</ymax>
+				</bndbox>
+			</item>
+			<item>
+				<name>Glycaspis</name>
+				<bndbox>
+					<xmin>31</xmin>
+					<ymin>372</ymin>
+					<xmax>57</xmax>
+					<ymax>393</ymax>
+				</bndbox>
+			</item>
+		</object>
+	</outputs>
+	<time_labeled>1588155078279</time_labeled>
+	<labeled>true</labeled>
+	<size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+</doc>

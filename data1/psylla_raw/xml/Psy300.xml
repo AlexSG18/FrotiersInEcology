@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<annotation>
+<folder>Psyllid_Hadera-500px</folder>
+<filename>Psy300.jpg</filename>
+<path>C:\Users\achia\Google Drive\insect_recognition\Psyllid_Hadera-500px\Psy300.jpg</path>
+<source>
+    <database>Unknown</database>
+</source>
+<size>
+    <width>500</width>
+    <height>500</height>
+    <depth>3</depth>
+</size>
+
+<segmented>0</segmented>
+    <object>
+    <name>Psyllaephagus</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>359</xmin>
+        <ymin>411</ymin>
+        <xmax>404</xmax>
+        <ymax>429</ymax>
+    </bndbox>
+</object>
+    <object>
+    <name>Psyllaephagus</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>343</xmin>
+        <ymin>127</ymin>
+        <xmax>390</xmax>
+        <ymax>146</ymax>
+    </bndbox>
+</object>
+    <object>
+    <name>Psyllaephagus</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+        <xmin>133</xmin>
+        <ymin>148</ymin>
+        <xmax>185</xmax>
+        <ymax>168</ymax>
+    </bndbox>
+</object>
+</annotation>

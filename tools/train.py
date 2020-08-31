@@ -127,6 +127,7 @@ def main():
 
     datasets = [build_dataset(cfg.data.train)]
     if len(cfg.workflow) == 2:
+        #print("check workflow...........................................................")
         val_dataset = copy.deepcopy(cfg.data.val)
         val_dataset.pipeline = cfg.data.train.pipeline
         datasets.append(build_dataset(val_dataset))
@@ -139,6 +140,7 @@ def main():
             CLASSES=datasets[0].CLASSES)
     # add an attribute for visualization convenience
     model.CLASSES = datasets[0].CLASSES
+    #print("how 11111...................................................\n")
     train_detector(
         model,
         datasets,

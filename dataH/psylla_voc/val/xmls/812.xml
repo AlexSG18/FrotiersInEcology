@@ -1,0 +1,13 @@
+<annotation><filename>812.jpg</filename><size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+<object><name>Psyllaephagus </name>
+				<bndbox>
+					<xmin>304</xmin>
+					<ymin>45</ymin>
+					<xmax>322</xmax>
+					<ymax>70</ymax>
+				</bndbox>
+			</object></annotation>

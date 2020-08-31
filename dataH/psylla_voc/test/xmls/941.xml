@@ -1,0 +1,13 @@
+<annotation><filename>941.jpg</filename><size>
+		<width>500</width>
+		<height>500</height>
+		<depth>3</depth>
+	</size>
+<object><name>Glycaspis</name>
+				<bndbox>
+					<xmin>238</xmin>
+					<ymin>92</ymin>
+					<xmax>308</xmax>
+					<ymax>135</ymax>
+				</bndbox>
+			</object></annotation>

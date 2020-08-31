@@ -146,6 +146,7 @@ def main():
         if args.format_only:
             dataset.format_results(outputs, **kwargs)
         if args.eval:
+            print("\n dataset.evaluate..............................")
             dataset.evaluate(outputs, args.eval, **kwargs)
 
 
